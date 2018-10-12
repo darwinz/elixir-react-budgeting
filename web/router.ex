@@ -7,6 +7,7 @@ defmodule Budgeting.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Budgeting.Plugs.SetUser
   end
 
   pipeline :api do
@@ -16,7 +17,11 @@ defmodule Budgeting.Router do
   scope "/", Budgeting do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", BudgetController, :index
+    get "/budgets/new", BudgetController, :new
+    post "/budgets", BudgetController, :create
+    get "/budgets/:id/edit", BudgetController, :edit
+    put "/budgets/:id", BudgetController, :update
   end
 
   # Other scopes may use custom stacks.
