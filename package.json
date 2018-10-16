@@ -1,18 +1,27 @@
 {
   "repository": {},
   "license": "MIT",
+  "description": "Elixir React Budgeting",
   "scripts": {
     "deploy": "brunch build --production",
+    "test": "npm test",
     "watch": "brunch watch --stdin"
   },
+  "author": "Brandon Johnson <brandon@apptys.com>",
   "dependencies": {
+    "materialize-css": "^0.97.7",
     "phoenix": "file:deps/phoenix",
-    "phoenix_html": "file:deps/phoenix_html"
+    "phoenix_html": "file:deps/phoenix_html",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   },
   "devDependencies": {
     "babel-brunch": "6.0.6",
+    "babel-preset-react": "^6.24.1",
     "brunch": "2.10.17",
     "clean-css-brunch": "2.10.0",
+    "css-brunch": "~2.0.0",
+    "javascript-brunch": "~2.0.0",
     "uglify-js-brunch": "2.1.1"
   }
 }

@@ -1,1 +1,13 @@
 /* This file is for your main application css. */
+
+.budget-nav {
+  margin-top: 40px !important;
+}
+
+.budget-nav h5 {
+  float: left;
+}
+
+.budget-nav .budget-nav-right {
+  float: right;
+}

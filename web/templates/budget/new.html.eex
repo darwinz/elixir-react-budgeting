@@ -1,0 +1,10 @@
+<%= form_for @changeset, budget_path(@conn, :create), fn f -> %>
+  <div class="form-group">
+    <%= text_input f, :name, placeholder: "Name", class: "form-control" %>
+    <%= text_input f, :starting_balance, placeholder: "Starting Balance", class: "form-control", type: "number" %>
+    <%= error_tag f, :name %>
+    <%= error_tag f, :starting_balance %>
+  </div>
+
+  <%= submit "Save Budget", class: "btn btn-primary" %>
+<% end %>

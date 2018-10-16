@@ -1,16 +1,18 @@
 defmodule Budgeting.Transaction do
   use Budgeting.Web, :model
 
+  @derive {Poison.Encoder, only: [:guid, :type, :category, :amount, :description, :user]}
+
   schema "transactions" do
     field :guid, :string
     field :type, :string
     field :category, :string
     field :amount, :float
     field :description, :string
-    field :budget_id, :integer
-    field :user_id, :integer
-    belongs_to :budgets, Budgeting.Budget
-    belongs_to :users, Budgeting.User
+    belongs_to :budget, Budgeting.Budget
+    belongs_to :user, Budgeting.User
+
+    timestamps()
   end
 
   def changeset(struct, params \\ %{}) do

@@ -1,0 +1,20 @@
+<div class="budget-nav">
+  <h5><%= @budget.name %></h5>
+  <div class="budget-nav-right">
+    <%= link to: budget_path(@conn, :edit, @budget.guid) do %>
+      <button class="btn grey waves-effect waves-light">Budget Settings</button>
+    <% end %>
+  </div>
+</div>
+
+<div class="input-field">
+  <textarea class="materialize-textarea"></textarea>
+  <ul class="collection">
+  </ul>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    window.createSocket(<%= @budget.id %>)
+  });
+</script>

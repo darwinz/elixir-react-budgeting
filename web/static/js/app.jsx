@@ -4,7 +4,6 @@ import "phoenix_html"
 import { Socket } from 'phoenix';
 import CommentsList from './CommentsList';
 import CommentBox from './CommentBox';
-import "./socket"
 
 class App extends Component {
   constructor(props) {

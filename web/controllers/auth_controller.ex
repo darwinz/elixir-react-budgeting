@@ -6,8 +6,20 @@ defmodule Budgeting.AuthController do
 
   alias Budgeting.User
 
+  def request(conn, _params) do
+    IEx.pry
+    render(conn, "request.html", callback_url: Helpers.callback_url(conn))
+  end
+
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
+    IEx.pry
+    username = auth.info.email
+    if Atom.to_string(auth.provider) == "github" do
+      username = auth.extra.raw_info.user["login"]
+    end
+
     user_params = %{
+      username: username,
       token: auth.credentials.token,
       email: auth.info.email,
       provider: Atom.to_string(auth.provider)
@@ -21,10 +33,11 @@ defmodule Budgeting.AuthController do
   def signout(conn, _params) do
     conn
     |> configure_session(drop: true)
-    |> redirect(to: budget_path(conn, :index))
+    |> redirect(to: page_path(conn, :index))
   end
 
   defp signin(conn, changeset) do
+    IEx.pry
     case insert_or_update_user(changeset) do
       {:ok, user} ->
         conn
@@ -47,3 +60,4 @@ defmodule Budgeting.AuthController do
     end
   end
 end
+

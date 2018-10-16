@@ -14,14 +14,24 @@ defmodule Budgeting.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/auth", Budgeting do
+    pipe_through :browser # Use the default browser stack
+
+    get "/signout", AuthController, :signout
+    get "/:provider/callback", AuthController, :callback
+    get "/:provider", AuthController, :request
+  end
+
   scope "/", Budgeting do
     pipe_through :browser # Use the default browser stack
 
-    get "/", BudgetController, :index
     get "/budgets/new", BudgetController, :new
+    get "/budgets/:guid/edit", BudgetController, :edit
+    get "/budgets/:guid", BudgetController, :show
+    put "/budgets/:guid", BudgetController, :update
     post "/budgets", BudgetController, :create
-    get "/budgets/:id/edit", BudgetController, :edit
-    put "/budgets/:id", BudgetController, :update
+    get "/budgets", BudgetController, :index
+    get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
