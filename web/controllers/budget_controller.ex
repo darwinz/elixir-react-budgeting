@@ -41,7 +41,6 @@ defmodule Budgeting.BudgetController do
   end
 
   def create(conn, %{"budget" => budget}) do
-    IEx.pry
     changeset = conn.assigns.user
       |> build_assoc(:budgets)
       |> Budget.changeset(Map.put(budget, "guid", Ecto.UUID.generate))
