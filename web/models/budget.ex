@@ -14,7 +14,6 @@ defmodule Budgeting.Budget do
   end
 
   def changeset(struct, params \\ %{}) do
-    IEx.pry
     struct
     |> cast(params, [:guid, :name, :starting_balance])
     |> validate_required([:guid, :name, :starting_balance])

@@ -4,10 +4,110 @@
   margin-top: 40px !important;
 }
 
-.budget-nav h5 {
+div.edit-links div {
+  margin: 0 0 0 20px;
+}
+
+div.form-header {
+  margin: 25px 0 0 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.float-left {
   float: left;
 }
 
-.budget-nav .budget-nav-right {
+.float-right {
   float: right;
 }
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+div.list-header {
+  position: relative;
+  margin: 2em 0 0 1em;
+  font-size: 18px;
+}
+
+.input-field form {
+  margin-top: 0 !important;
+}
+
+ul.new-transaction-fields-list {
+  list-style-type: none;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  border: none;
+  margin-top: 0 !important;
+}
+
+li.new-transaction-field {
+  flex: 0 0 20%;
+  padding: 1em;
+  display: flex;
+  align-items: flex-end;
+  border: none;
+}
+
+li.hidden {
+  width: 0 !important;
+  flex: 0 0 0 !important;
+}
+
+li input {
+  margin-bottom: 0px !important;
+}
+
+div.collection-header {
+  margin: 10px 0 0 10px;
+  border-top: 1px solid #CCC;
+  padding-top: 40px;
+}
+
+div.collection-header-col {
+  text-decoration: underline;
+}
+
+div.collection-header-col, div.collection-item-col {
+  font-size: 15px;
+}
+
+div.left-side div.collection-header-col, div.left-side div.collection-item-col {
+  margin: 0 105px 0 0;
+}
+
+div.right-side div.collection-header-col, div.right-side div.collection-item-col {
+  margin: 0 0 0 105px;
+}
+
+ul.collection {
+
+}
+
+ul.collection li:nth-child(even) {
+  background-color: rgba(242,242,242,0.5);
+}
+
+div.description {
+  color: #888;
+  font-style: italic;
+  font-size: 14px;
+  margin-left: 15px !important;
+}
+
+div.totals-row {
+  font-weight: bold;
+  font-size: 18px;
+  padding: 20px;
+  text-decoration: none !important;
+}
+

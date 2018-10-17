@@ -3,12 +3,16 @@
 <ul class="collection">
   <%= for budget <- @budgets do %>
     <li class="collection-item">
-      <%= link budget.title, to: budget_path(@conn, :show, budget) %>
+      <%= link budget.name, to: budget_path(@conn, :show, budget.guid) %>
 
       <%= if @conn.assigns.user.id == budget.user_id do %>
-        <div class="right">
-          <%= link "Edit", to: budget_path(@conn, :edit, budget) %>
-          <%= link "Delete", to: budget_path(@conn, :delete, budget), method: :delete %>
+        <div class="right clearfix edit-links">
+          <div class="collection-item-col float-left">
+            <%= link "Edit", to: budget_path(@conn, :edit, budget.guid) %>
+          </div>
+          <div class="collection-item-col float-left">
+            <%= link "Delete", to: budget_path(@conn, :delete, budget.guid), method: :delete %>
+          </div>
         </div>
       <% end %>
     </li>

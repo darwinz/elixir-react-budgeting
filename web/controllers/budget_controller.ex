@@ -3,15 +3,14 @@ require IEx
 defmodule Budgeting.BudgetController do
   use Budgeting.Web, :controller
 
-  alias Budgeting.{Budget, Transaction}
+  alias Budgeting.{Budget, Transaction, Category, TransactionType, User}
 
   plug Budgeting.Plugs.RequireAuth when action in [:index, :new, :create, :edit, :update, :delete]
   plug :check_budget_owner when action in [:update, :edit, :delete]
 
   def index(conn, _params) do
-    IEx.pry
     current_user = conn.assigns.user
-    response = Repo.get_by(Budget, user_id: current_user.id)
+    response = Repo.all(Budget, user_id: current_user.id)
     case response do
       nil -> render conn, "index.html", budgets: []
       budgets -> render conn, "index.html", budgets: budgets
@@ -19,9 +18,20 @@ defmodule Budgeting.BudgetController do
   end
 
   def show(conn, %{"guid" => guid}) do
+    changeset = Transaction.changeset(%Transaction{}, %{})
     budget = Repo.get_by(Budget, guid: guid)
-    transactions = Repo.get_by(Transaction, budget_id: budget.id)
-    render conn, "show.html", budget: budget, transactions: transactions
+    transactions = Repo.all Ecto.assoc(budget, :transactions) 
+    categories = Repo.all(Category)
+                 |> Enum.map(&{&1.name, String.replace(&1.name, " ", "_") |> String.downcase()})
+    transaction_types = Repo.all(TransactionType)
+                        |> Enum.map(&{&1.type, String.replace(&1.type, " ", "_") |> String.downcase()})
+    render conn, 
+           "show.html",
+           budget: budget,
+           transactions: transactions, 
+           changeset: changeset, 
+           categories: categories, 
+           transaction_types: transaction_types
   end
 
   def new(conn, _params) do
@@ -31,6 +41,7 @@ defmodule Budgeting.BudgetController do
   end
 
   def create(conn, %{"budget" => budget}) do
+    IEx.pry
     changeset = conn.assigns.user
       |> build_assoc(:budgets)
       |> Budget.changeset(Map.put(budget, "guid", Ecto.UUID.generate))
@@ -39,7 +50,7 @@ defmodule Budgeting.BudgetController do
       {:ok, budget} ->
         conn
         |> put_flash(:info, "Budget created")
-        |> redirect(to: budget_path(conn, :edit, budget))
+        |> redirect(to: budget_path(conn, :edit, budget.guid))
       {:error, changeset} ->
         render conn, "new.html", changeset: changeset
     end
@@ -75,7 +86,6 @@ defmodule Budgeting.BudgetController do
   end
 
   def check_budget_owner(conn, _params) do
-    IEx.pry
     %{params: %{"guid" => guid}} = conn
 
     if Repo.get_by(Budget, guid: guid).user_id == conn.assigns.user.id do

@@ -1,17 +1,19 @@
 defmodule Budgeting.TransactionsChannel do
   use Budgeting.Web, :channel
-  alias Budgeting.{Budget, Transaction}
+  alias Budgeting.{Budget, Transaction, Category, TransactionType}
 
   def join("transactions:" <> budget_id, _params, socket) do
+    categories = Repo.all(Category) |> Enum.map(&{&1.name, &1.id})
+    transaction_types = Repo.all(TransactionType) |> Enum.map(&{&1.type, &1.id})
     budget_id = String.to_integer(budget_id)
     budget = Budget
       |> Repo.get(budget_id)
       |> Repo.preload(transactions: [:user])
 
-    {:ok, %{transactions: budget.transactions}, assign(socket, :budget, budget)}
+    {:ok, %{transactions: budget.transactions, budget_balance: budget.starting_balance}, assign(socket, :budget, budget)}
   end
 
-  def handle_in(name, %{"type" => type, "cat" => cat, "amount" => amount, "desc" => desc}, socket) do
+  def handle_in(name, %{"type" => type, "cat" => cat, "amt" => amt, "desc" => desc}, socket) do
     budget = socket.assigns.budget
     user_id = socket.assigns.user_id
 
@@ -22,7 +24,7 @@ defmodule Budgeting.TransactionsChannel do
           guid: Ecto.UUID.generate,
           type: type,
           category: cat,
-          amount: amount,
+          amount: amt,
           description: desc,
           budget_id: budget.id,
           user_id: user_id
@@ -39,3 +41,4 @@ defmodule Budgeting.TransactionsChannel do
     end
   end
 end
+

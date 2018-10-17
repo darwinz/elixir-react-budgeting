@@ -1,6 +1,6 @@
-<div class="budget-nav">
-  <h5><%= @budget.name %></h5>
-  <div class="budget-nav-right">
+<div class="budget-nav clearfix">
+  <h5 class="float-left"><%= @budget.name %></h5>
+  <div class="float-right">
     <%= link to: budget_path(@conn, :edit, @budget.guid) do %>
       <button class="btn grey waves-effect waves-light">Budget Settings</button>
     <% end %>
@@ -8,9 +8,53 @@
 </div>
 
 <div class="input-field">
-  <textarea class="materialize-textarea"></textarea>
-  <ul class="collection">
-  </ul>
+  <div class="list-header">New Transaction</div>
+  <%= form_for @changeset, transaction_path(@conn, :create), fn f -> %>
+    <ul class="new-transaction-fields-list form-group">
+      <li class="new-transaction-field">
+        <%= select f, :type, @transaction_types, class: "form-control", id: "transaction_type" %>
+      </li>
+      <li class="new-transaction-field">
+        <%= select f, :category, @categories, class: "form-control", id: "transaction_category" %>
+      </li>
+      <li class="new-transaction-field">
+        <%= text_input f, :amount, placeholder: "Amount", class: "form-control", type: "number", id: "transaction_amount" %>
+      </li>
+      <li class="new-transaction-field">
+        <%= text_input f, :description, placeholder: "Description", class: "form-control", id: "transaction_desc" %>
+      </li>
+      <li class="new-transaction-field hidden">
+        <%= hidden_input f, :budget_id, value: @budget.id, id: "budget_id" %>
+      </li>
+      <li class="new-transaction-field">
+        <%= submit "Save Transaction", class: "btn btn-primary", id: "btn_budget_id" %>
+      </li>
+    </ul>
+  <% end %>
+</div>
+
+<div class="collection-header clearfix">
+  <div class="collection-header-col float-left left-side">
+    <div class="collection-header-col float-left">Category</div>
+    <div class="collection-header-col float-left">Description</div>
+  </div>
+  <div class="collection-header-col float-right right-side">
+    <div class="collection-header-col float-left">Income</div>
+    <div class="collection-header-col float-left">Expenses</div>
+  </div>
+</div>
+<ul class="collection">
+</ul>
+
+<div class="totals-row">
+  <div class="collection-item-col float-left left-side">
+    <div class="collection-item-col float-left">Balance</div>
+  </div>
+  <div class="collection-item-col float-right right-side">
+    <div class="collection-item-col float-left" id="budget-balance">
+      <%= @budget.starting_balance %>
+    </div>
+  </div>
 </div>
 
 <script>

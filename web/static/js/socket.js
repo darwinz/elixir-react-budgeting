@@ -9,21 +9,23 @@ const createSocket = budgetId => {
     .join()
     .receive('ok', resp => {
       console.log(resp);
-      renderComments(resp.comments);
+      renderTransactions(resp.transactions);
     })
     .receive('error', resp => {
       console.log('Unable to join', resp);
     });
 
-  channel.on(`transactions:${budgetId}:new`, renderComment);
+  channel.on(`transactions:${budgetId}:new`, renderTransactions);
 
-  document.querySelector('button').addEventListener('click', () => {
+  document.querySelector('#btn_budget_id').addEventListener('click', (event) => {
+    event.preventDefault();
+
     const type = document.getElementById('transaction_type').value;
     const cat= document.getElementById('transaction_category').value;
-    const amount = document.getElementById('transaction_amount').value;
-    const desc= document.getElementById('transaction_description').value;
+    const amt = document.getElementById('transaction_amount').value;
+    const desc= document.getElementById('transaction_desc').value;
 
-    channel.push('transaction:add', { type: type, cat: cat, amount: amount, desc: desc });
+    channel.push('transaction:add', { type: type, cat: cat, amt: amt, desc: desc });
   });
 };
 
@@ -42,16 +44,19 @@ function renderTransaction(event) {
 }
 
 function transactionTemplate(transaction) {
-  let email = 'Anonymous';
-  if (transaction.user) {
-    email = transaction.user.username;
-  }
+  let income_amount = transaction.type == 'income' ? transaction.amount : "&nbsp;&nbsp;&nbsp;";
+  let expense_amount = transaction.type == 'expense' ? transaction.amount : "&nbsp;&nbsp;&nbsp;";
+  let desc = transaction.description == null ? "&nbsp" : transaction.description;
 
   return `
-    <li class="collection-item">
-      ${transaction.content}
-      <div class="secondary-content">
-        ${email}
+    <li class="collection-item clearfix">
+      <div class="collection-item-col float-left left-side">
+        <div class="collection-item-col float-left">${transaction.category}</div>
+        <div class="collection-item-col float-left description">${desc}</div>
+      </div>
+      <div class="collection-item-col float-right right-side">
+        <div class="collection-item-col float-left">${income_amount}</div>
+        <div class="collection-item-col float-left">${expense_amount}</div>
       </div>
     </li>
   `;

@@ -29,8 +29,12 @@ defmodule Budgeting.Router do
     get "/budgets/:guid/edit", BudgetController, :edit
     get "/budgets/:guid", BudgetController, :show
     put "/budgets/:guid", BudgetController, :update
+    delete "/budgets/:guid", BudgetController, :delete
     post "/budgets", BudgetController, :create
     get "/budgets", BudgetController, :index
+    post "/transactions", TransactionController, :create
+    put "/transactions/:guid", TransactionController, :update
+    delete "/transactions/:guid", TransactionController, :delete
     get "/", PageController, :index
   end
 
