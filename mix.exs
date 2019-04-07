@@ -3,14 +3,15 @@ defmodule Budgeting.Mixfile do
 
   def project do
     [app: :budgeting,
-     version: "0.0.1",
-     elixir: "~> 1.2",
-     elixirc_paths: elixirc_paths(Mix.env),
-     compilers: [:phoenix, :gettext] ++ Mix.compilers,
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     aliases: aliases(),
-     deps: deps()]
+      version: "0.0.1",
+      elixir: "~> 1.2",
+      elixirc_paths: elixirc_paths(Mix.env),
+      compilers: [:phoenix, :gettext] ++ Mix.compilers,
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      aliases: aliases(),
+      preferred_cli_env: [espec: :test],
+      deps: deps()]
   end
 
   # Configuration for the OTP application.
@@ -30,17 +31,19 @@ defmodule Budgeting.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.2.5"},
-     {:phoenix_pubsub, "~> 1.0"},
-     {:phoenix_ecto, "~> 3.0"},
-     {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 2.6"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:gettext, "~> 0.11"},
-     {:cowboy, "~> 1.0"},
-     {:ueberauth, "~> 0.5"},
-     {:ueberauth_github, "~> 0.7"},
-     {:ueberauth_facebook, "~> 0.7"}]
+    [{:cowboy, "~> 1.0"},
+      {:espec, "~> 1.7.0", only: :test},
+      {:espec_phoenix, "~> 0.6.10", only: :test},
+      {:gettext, "~> 0.11"},
+      {:phoenix, "~> 1.3.0"},
+      {:phoenix_ecto, "~> 3.0"},
+      {:phoenix_html, "~> 2.6"},
+      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:phoenix_pubsub, "~> 1.0"},
+      {:postgrex, ">= 0.0.0"},
+      {:ueberauth, "~> 0.5"},
+      {:ueberauth_github, "~> 0.7"},
+      {:ueberauth_facebook, "~> 0.7"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
@@ -52,6 +55,6 @@ defmodule Budgeting.Mixfile do
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
      "ecto.reset": ["ecto.drop", "ecto.setup"],
-     "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
+     test: ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
 end

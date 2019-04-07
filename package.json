@@ -9,7 +9,7 @@
   },
   "author": "Brandon Johnson <brandon@apptys.com>",
   "dependencies": {
-    "materialize-css": "^0.97.7",
+    "materialize-css": "1.0.0",
     "phoenix": "file:deps/phoenix",
     "phoenix_html": "file:deps/phoenix_html",
     "react": "^16.0.0",
