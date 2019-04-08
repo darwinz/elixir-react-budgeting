@@ -36,8 +36,8 @@ config :ueberauth, Ueberauth.Strategy.Github.OAuth,
   client_id: System.get_env("GITHUB_CLIENT_ID"),
   client_secret: System.get_env("GITHUB_CLIENT_SECRET")
 
-config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
-  client_id: System.get_env("FACEBOOK_APP_ID"),
-  client_secret: System.get_env("FACEBOOK_APP_SECRET"),
-  redirect_uri: System.get_env("FACEBOOK_REDIRECT_URI")
+#config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
+#  client_id: System.get_env("FACEBOOK_APP_ID"),
+#  client_secret: System.get_env("FACEBOOK_APP_SECRET"),
+#  redirect_uri: System.get_env("FACEBOOK_REDIRECT_URI")
 
