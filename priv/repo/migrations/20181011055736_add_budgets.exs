@@ -4,8 +4,8 @@ defmodule Budgeting.Repo.Migrations.AddBudgets do
   def change do
     create table(:budgets) do
       add :guid, :string, size: 40
-      add :name, :string
-      add :starting_balance, :float
+      add :name, :string, null: false
+      add :starting_balance, :float, default: 0.0
       add :user_id, references(:users)
 
       timestamps()
