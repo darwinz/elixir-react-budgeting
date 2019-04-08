@@ -16,7 +16,7 @@
     "react-dom": "^16.0.0"
   },
   "devDependencies": {
-    "babel-brunch": "6.0.6",
+    "babel-brunch": "7.0.1",
     "babel-preset-react": "^6.24.1",
     "brunch": "2.10.17",
     "clean-css-brunch": "2.10.0",

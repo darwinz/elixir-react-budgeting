@@ -1,14 +1,68 @@
 # My Budgeting App
 
-To start the app:
+A simple income / expense tracking app, built with Elixir / Phoenix and React
 
-  * Install dependencies with `mix deps.get`
-  * Install postgresql and ensure it is running
-  * Add postgresql credentials as environment variables with `export POSTGRES_USERNAME="USERNAME_HERE"` and `export POSTGRES_PASSWORD="PASSWORD_HERE"`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  * Seed the database with `mix run priv/repo/seeds.exs`
-  * Install Node.js dependencies with `npm install`
-  * Start Phoenix endpoint with `mix phoenix.server` or `iex -S mix phoenix.server`
+Pre-requisites (running in docker)
+------------------
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+* Docker (https://docs.docker.com/docker-for-mac/install/)
+* Docker compose (https://docs.docker.com/compose/install/)
 
+
+Install / Setup
+------------------
+
+* Clone this repository
+* Run `docker-compose build`
+```bash
+$ docker-compose build
+```
+* Run `docker-compose up`
+```bash
+$ docker-compose up
+```
+
+
+Pre-requisites (running sans docker)
+------------------
+
+* Elixir 1.7+
+* Erlang 19, 20, or 21
+* Phoenix 1.4.3+
+* PostgreSQL 9.6.3
+* NPM 5.3+
+* Node.js 8.5.0+
+* React 16.1.1+
+
+
+Install / Setup
+------------------
+
+* Install dependencies
+```bash
+$ mix deps.get
+```
+* Create and migrate your database
+```bash
+$ mix ecto.create && mix ecto.migrate
+```
+* Seed the database
+```bash
+$ mix run priv/repo/seeds.exs
+```
+* Install JavaScript dependencies
+```bash
+$ npm install
+```
+* Start Phoenix server
+```bash
+$ mix phoenix.server
+```
+
+-or-
+
+```bash
+$ iex -S mix phoenix.server
+```
+
+Now you can visit [localhost:4000](http://localhost:4000) from your browser.
