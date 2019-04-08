@@ -65,4 +65,13 @@ $ mix phoenix.server
 $ iex -S mix phoenix.server
 ```
 
-Now you can visit [localhost:4000](http://localhost:4000) from your browser.
+Visit [localhost:4000](http://localhost:4000) in browser
+
+Testing
+------------------
+
+* Run the test suite
+```bash
+$ MIX_ENV=test mix espec.init
+$ MIX_ENV=test mix espec
+```

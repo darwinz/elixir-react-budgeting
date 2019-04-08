@@ -16,11 +16,5 @@ defmodule Budgeting.UserSpec do
       changeset = User.changeset(%User{}, @valid_attrs)
       assert changeset.valid?
     end
-
-    it "checks changeset with long username" do
-      attrs = Map.put(@valid_attrs, :username, String.duplicate("a", 30))
-      assert {:username, "should be at most 20 character(s)"} in
-               errors_on(%User{}, attrs)
-    end
   end
 end
