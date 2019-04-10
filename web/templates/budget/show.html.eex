@@ -33,29 +33,28 @@
   <% end %>
 </div>
 
-<div class="collection-header clearfix">
-  <div class="collection-header-col float-left left-side">
-    <div class="collection-header-col float-left">Category</div>
-    <div class="collection-header-col float-left">Description</div>
-  </div>
-  <div class="collection-header-col float-right right-side">
-    <div class="collection-header-col float-left">Income</div>
-    <div class="collection-header-col float-left">Expenses</div>
-  </div>
-</div>
-<ul class="collection">
-</ul>
+<table class="striped">
+    <thead>
+      <tr class="collection-header-col">
+          <th>Category</th>
+          <th>Description</th>
+          <th></th>
+          <th>Income</th>
+          <th class="right-align">Expenses</th>
+      </tr>
+    </thead>
+    <tbody class="collection">
+    </tbody>
+</table>
 
-<div class="totals-row">
-  <div class="collection-item-col float-left left-side">
-    <div class="collection-item-col float-left">Balance</div>
-  </div>
-  <div class="collection-item-col float-right right-side">
-    <div class="collection-item-col float-left" id="budget-balance">
-      <%= @budget.starting_balance %>
-    </div>
-  </div>
-</div>
+<table class="striped">
+    <tbody>
+      <tr class="collection-header-col">
+          <th colspan="3">Balance</th>
+          <th class="right-align balance">$ <%= (@budget.starting_balance |> Float.round(2) |> Float.to_string) %></th>
+      </tr>
+    </tbody>
+</table>
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {

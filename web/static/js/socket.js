@@ -43,23 +43,40 @@ function renderTransaction(event) {
   document.querySelector('.collection').innerHTML += renderedTransaction;
 }
 
+function renderBalance(event) {
+  const renderedBalance = balanceTemplate(event.budget);
+
+  document.querySelector('.balance').innerHTML += renderedBalance;
+}
+
 function transactionTemplate(transaction) {
   let income_amount = transaction.type == 'income' ? transaction.amount : "&nbsp;&nbsp;&nbsp;";
   let expense_amount = transaction.type == 'expense' ? transaction.amount : "&nbsp;&nbsp;&nbsp;";
   let desc = transaction.description == null ? "&nbsp" : transaction.description;
 
   return `
-    <li class="collection-item clearfix">
-      <div class="collection-item-col float-left left-side">
-        <div class="collection-item-col float-left">${transaction.category}</div>
-        <div class="collection-item-col float-left description">${desc}</div>
-      </div>
-      <div class="collection-item-col float-right right-side">
-        <div class="collection-item-col float-left">${income_amount}</div>
-        <div class="collection-item-col float-left">${expense_amount}</div>
-      </div>
-    </li>
+    <tr class="collection-item">
+      <td class="collection-item-col">
+        <span class="collection-item-col">${transaction.category}</span>
+      </td>
+      <td colspan=""2">
+        <span class="collection-item-col description">${desc}</span>
+      </td>
+      <td class="collection-item-col">&nbsp;</td>
+      <td class="collection-item-col">
+        <span class="collection-item-col">${income_amount}</span>
+      </td>
+      <td class="collection-item-col right-align">
+        <span class="collection-item-col">${expense_amount}</span>
+      </td>
+    </tr>
   `;
+}
+
+function balanceTemplate(budget) {
+  let current_balance = budget.current_balance;
+
+  return current_balance;
 }
 
 window.createSocket = createSocket;

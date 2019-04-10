@@ -67,17 +67,13 @@ li input {
   margin-bottom: 0px !important;
 }
 
-div.collection-header {
+tr.collection-header {
   margin: 10px 0 0 10px;
   border-top: 1px solid #CCC;
   padding-top: 40px;
 }
 
-div.collection-header-col {
-  text-decoration: underline;
-}
-
-div.collection-header-col, div.collection-item-col {
+tr.collection-header-col, div.collection-item-col {
   font-size: 15px;
 }
 
@@ -89,11 +85,11 @@ div.right-side div.collection-header-col, div.right-side div.collection-item-col
   margin: 0 0 0 105px;
 }
 
-ul.collection {
+tbody.collection {
 
 }
 
-ul.collection li:nth-child(even) {
+tbody.collection li:nth-child(even) {
   background-color: rgba(242,242,242,0.5);
 }
 
