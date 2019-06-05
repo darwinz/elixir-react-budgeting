@@ -20,7 +20,7 @@
     <nav class="light-blue">
       <div class="nav-wrapper container">
         <a href="/" class="brand-logo">
-          Budgets
+          <i class="large material-icons">attach_money</i> Budgets
         </a>
         <ul class="right">
           <%= if @conn.assigns[:user] do %>
