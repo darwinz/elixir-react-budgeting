@@ -56,13 +56,13 @@ $ npm install
 ```
 * Start Phoenix server
 ```bash
-$ mix phoenix.server
+$ mix phx.server
 ```
 
 -or-
 
 ```bash
-$ iex -S mix phoenix.server
+$ iex -S mix phx.server
 ```
 
 Visit [localhost:4000](http://localhost:4000) in browser
@@ -70,8 +70,15 @@ Visit [localhost:4000](http://localhost:4000) in browser
 Testing
 ------------------
 
-* Run the test suite
+* Run the ESpec test suite
 ```bash
 $ MIX_ENV=test mix espec.init
 $ MIX_ENV=test mix espec
+```
+
+-or-
+
+* Run the ExUnit test suite
+```bash
+$ MIX_ENV=test mix test
 ```
