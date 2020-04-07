@@ -18,7 +18,7 @@
   "devDependencies": {
     "babel-brunch": "7.0.1",
     "babel-preset-react": "^6.24.1",
-    "brunch": "2.10.17",
+    "brunch": "3.0.0",
     "clean-css-brunch": "2.10.0",
     "css-brunch": "~2.0.0",
     "javascript-brunch": "~2.0.0",
