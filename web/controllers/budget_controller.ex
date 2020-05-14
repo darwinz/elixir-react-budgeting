@@ -2,6 +2,7 @@ require IEx
 
 defmodule Budgeting.BudgetController do
   use Budgeting.Web, :controller
+  import Phoenix.HTML.Link
 
   alias Budgeting.{Budget, Transaction, Category, TransactionType, User}
 
@@ -44,11 +45,12 @@ defmodule Budgeting.BudgetController do
     changeset = conn.assigns.user
       |> build_assoc(:budgets)
       |> Budget.changeset(Map.put(budget, "guid", Ecto.UUID.generate))
+      |> Budget.changeset(Map.put(budget, "current_balance", budget.starting_balance))
 
     case Repo.insert(changeset) do
       {:ok, budget} ->
         conn
-        |> put_flash(:info, "Budget created")
+        |> put_flash(:info, ["Budget created: ", link(budget.guid, to: budget_path(conn, :show, budget.guid))])
         |> redirect(to: budget_path(conn, :edit, budget.guid))
       {:error, changeset} ->
         render conn, "new.html", changeset: changeset
