@@ -1,3 +1,5 @@
+[![Build Status](https://github.com/darwinz/elixir-react-budgeting/workflows/test/badge.svg)](https://github.com/darwinz/elixir-react-budgeting/actions)
+
 # My Budgeting App
 
 A simple income / expense tracking app, built with Elixir / Phoenix and React
