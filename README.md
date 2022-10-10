@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/darwinz/elixir-react-budgeting/workflows/test/badge.svg)](https://github.com/darwinz/elixir-react-budgeting/actions)
+[![Build Status](https://github.com/darwinz/elixir-react-budgeting/actions/workflows/test.yml/badge.svg)](https://github.com/darwinz/elixir-react-budgeting/actions)
 
 # My Budgeting App
 
