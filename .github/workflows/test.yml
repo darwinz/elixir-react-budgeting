@@ -26,7 +26,9 @@ jobs:
       - name: Set up Elixir
         uses: actions/setup-elixir@v1
         with:
-          elixir-version: '1.11.2' # Define the elixir version [required]
-          otp-version: '23.1' # Define the OTP version [required]
+          elixir-version: '1.7.4' # Define the elixir version [required]
+          otp-version: '19.3' # Define the OTP version [required]
       - run: mix deps.get
       - run: mix test
+        env:
+          MIX_ENV: test
