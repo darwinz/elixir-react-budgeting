@@ -5,16 +5,19 @@ defmodule Budgeting.AuthController do
   plug Ueberauth
 
   alias Budgeting.User
+  alias Ueberauth.Strategy.Helpers
 
   def request(conn, _params) do
     render(conn, "request.html", callback_url: Helpers.callback_url(conn))
   end
 
-  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
-    username = auth.info.email
-    if Atom.to_string(auth.provider) == "github" do
-      username = auth.extra.raw_info.user["login"]
-    end
+  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
+    username =
+      if Atom.to_string(auth.provider) == "github" do
+        auth.extra.raw_info.user["login"]
+      else
+        auth.info.email
+      end
 
     user_params = %{
       username: username,
@@ -57,4 +60,3 @@ defmodule Budgeting.AuthController do
     end
   end
 end
-

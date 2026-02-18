@@ -11,7 +11,7 @@
             <%= link "Edit", to: budget_path(@conn, :edit, budget.guid) %>
           </div>
           <div class="collection-item-col float-left">
-            <%= link "Delete", to: budget_path(@conn, :delete, budget.guid), method: :delete %>
+            <%= link "Delete", to: budget_path(@conn, :delete, budget.guid), method: :delete, data: [confirm: "Delete this budget? This cannot be undone."] %>
           </div>
         </div>
       <% end %>

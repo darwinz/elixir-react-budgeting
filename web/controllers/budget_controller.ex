@@ -4,7 +4,7 @@ defmodule Budgeting.BudgetController do
   use Budgeting.Web, :controller
   import Phoenix.HTML.Link
 
-  alias Budgeting.{Budget, Transaction, Category, TransactionType, User}
+  alias Budgeting.{Budget, Transaction, Category, TransactionType}
 
   plug Budgeting.Plugs.RequireAuth when action in [:index, :new, :create, :edit, :update, :delete]
   plug :check_budget_owner when action in [:update, :edit, :delete]
@@ -23,9 +23,9 @@ defmodule Budgeting.BudgetController do
     budget = Repo.get_by(Budget, guid: guid)
     transactions = Repo.all Ecto.assoc(budget, :transactions) 
     categories = Repo.all(Category)
-                 |> Enum.map(&{&1.name, String.replace(&1.name, " ", "_") |> String.downcase()})
+                 |> Enum.map(&[&1.name, String.replace(&1.name, " ", "_") |> String.downcase()])
     transaction_types = Repo.all(TransactionType)
-                        |> Enum.map(&{&1.type, String.replace(&1.type, " ", "_") |> String.downcase()})
+                        |> Enum.map(&[&1.type, String.replace(&1.type, " ", "_") |> String.downcase()])
     render conn, 
            "show.html",
            budget: budget,
@@ -42,10 +42,13 @@ defmodule Budgeting.BudgetController do
   end
 
   def create(conn, %{"budget" => budget}) do
+    budget_params =
+      budget
+      |> Map.put("guid", Ecto.UUID.generate())
+
     changeset = conn.assigns.user
       |> build_assoc(:budgets)
-      |> Budget.changeset(Map.put(budget, "guid", Ecto.UUID.generate))
-      |> Budget.changeset(Map.put(budget, "current_balance", budget.starting_balance))
+      |> Budget.changeset(budget_params)
 
     case Repo.insert(changeset) do
       {:ok, budget} ->
