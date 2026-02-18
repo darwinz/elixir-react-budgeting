@@ -1,5 +1,59 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to My Budgeting App" %></h2>
-  <p class="lead">A simple budgeting tool for recording income and expenses</p>
-</div>
+<section class="home-hero">
+  <div class="home-hero-content">
+    <p class="home-kicker">Personal Budgeting</p>
+    <h1>Build a clear money plan you can keep.</h1>
+    <p class="home-lead">
+      Track every transaction, monitor your balance in real time, and stay focused on where your money goes.
+    </p>
+    <div class="home-cta-row">
+      <%= if @conn.assigns[:user] do %>
+        <%= link "Open My Budgets", to: budget_path(@conn, :index), class: "btn btn-primary" %>
+      <% else %>
+        <%= link "Sign in with GitHub", to: auth_path(@conn, :request, "github"), class: "btn btn-primary" %>
+      <% end %>
+      <a href="#home-features" class="btn home-secondary-btn">See Features</a>
+    </div>
+  </div>
+  <div class="home-hero-stats">
+    <article class="home-stat-card">
+      <p class="home-stat-label">Real-time balance</p>
+      <p class="home-stat-value">Live</p>
+      <p class="home-stat-copy">Watch your budget react as you add transactions.</p>
+    </article>
+    <article class="home-stat-card">
+      <p class="home-stat-label">Fast setup</p>
+      <p class="home-stat-value">2 min</p>
+      <p class="home-stat-copy">Create a budget and start tracking immediately.</p>
+    </article>
+    <article class="home-stat-card">
+      <p class="home-stat-label">Signal over noise</p>
+      <p class="home-stat-value">Focused</p>
+      <p class="home-stat-copy">Filter, search, and sort to find what matters.</p>
+    </article>
+  </div>
+</section>
 
+<section id="home-features" class="home-features">
+  <article class="home-feature-card">
+    <h3>Track with confidence</h3>
+    <p>Capture income and expenses with validation that prevents bad entries.</p>
+  </article>
+  <article class="home-feature-card">
+    <h3>Review quickly</h3>
+    <p>Use filters and search to spot spending trends without leaving the page.</p>
+  </article>
+  <article class="home-feature-card">
+    <h3>Recover from mistakes</h3>
+    <p>Delete with confirmation and undo recent deletes to avoid accidental loss.</p>
+  </article>
+</section>
+
+<section class="home-bottom-cta">
+  <h2>Ready to make budgeting simpler?</h2>
+  <%= if @conn.assigns[:user] do %>
+    <%= link "Go to My Budgets", to: budget_path(@conn, :index), class: "btn btn-primary" %>
+  <% else %>
+    <%= link "Get Started with GitHub", to: auth_path(@conn, :request, "github"), class: "btn btn-primary" %>
+  <% end %>
+</section>
+</div>
