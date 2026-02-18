@@ -7,57 +7,20 @@
   </div>
 </div>
 
-<div class="input-field">
-  <div class="list-header">New Transaction</div>
-  <%= form_for @changeset, transaction_path(@conn, :create), fn f -> %>
-    <ul class="new-transaction-fields-list form-group">
-      <li class="new-transaction-field">
-        <%= select f, :type, @transaction_types, class: "form-control", id: "transaction_type" %>
-      </li>
-      <li class="new-transaction-field">
-        <%= select f, :category, @categories, class: "form-control", id: "transaction_category" %>
-      </li>
-      <li class="new-transaction-field">
-        <%= text_input f, :amount, placeholder: "Amount", class: "form-control", type: "number", id: "transaction_amount" %>
-      </li>
-      <li class="new-transaction-field">
-        <%= text_input f, :description, placeholder: "Description", class: "form-control", id: "transaction_desc" %>
-      </li>
-      <li class="new-transaction-field hidden">
-        <%= hidden_input f, :budget_id, value: @budget.id, id: "budget_id" %>
-      </li>
-      <li class="new-transaction-field">
-        <%= submit "Save Transaction", class: "btn btn-primary", id: "btn_budget_id" %>
-      </li>
-    </ul>
-  <% end %>
-</div>
-
-<table class="striped">
-    <thead>
-      <tr class="collection-header-col">
-          <th>Category</th>
-          <th>Description</th>
-          <th></th>
-          <th>Income</th>
-          <th class="right-align">Expenses</th>
-      </tr>
-    </thead>
-    <tbody class="collection">
-    </tbody>
-</table>
-
-<table class="striped">
-    <tbody>
-      <tr class="collection-header-col">
-          <th colspan="3">Balance</th>
-          <th class="right-align balance">$ <%= (@budget.starting_balance |> Float.round(2) |> Float.to_string) %></th>
-      </tr>
-    </tbody>
-</table>
+<div id="transactions-app"></div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    window.createSocket(<%= @budget.id %>)
+    var categories = <%= raw Poison.encode!(@categories) %>;
+    var transactionTypes = <%= raw Poison.encode!(@transaction_types) %>;
+    var budgetName = <%= raw Poison.encode!(@budget.name) %>;
+    window.renderTransactionsApp(
+      "transactions-app",
+      <%= @budget.id %>,
+      budgetName,
+      <%= @budget.starting_balance %>,
+      categories,
+      transactionTypes
+    );
   });
 </script>

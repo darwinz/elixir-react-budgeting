@@ -1,7 +1,7 @@
 defmodule Budgeting.Transaction do
   use Budgeting.Web, :model
 
-  @derive {Poison.Encoder, only: [:guid, :type, :category, :amount, :description, :user]}
+  @derive {Poison.Encoder, only: [:id, :guid, :type, :category, :amount, :description, :inserted_at]}
 
   schema "transactions" do
     field :guid, :string
