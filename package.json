@@ -5,7 +5,7 @@
   "scripts": {
     "deploy": "brunch build --production",
     "test": "npm test",
-    "watch": "brunch watch --stdin"
+    "watch": "brunch watch"
   },
   "author": "Brandon Johnson <brandon@apptys.com>",
   "dependencies": {
@@ -16,12 +16,13 @@
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
-    "babel-brunch": "7.0.1",
+    "@babel/preset-env": "^7.29.0",
     "@babel/preset-react": "^7.0.0",
+    "babel-brunch": "7.0.1",
     "brunch": "3.0.0",
     "clean-css-brunch": "3.0.0",
     "css-brunch": "~2.0.0",
     "javascript-brunch": "~2.0.0",
-    "uglify-js-brunch": "2.1.1"
+    "terser-brunch": "^4.1.0"
   }
 }
