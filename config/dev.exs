@@ -35,7 +35,6 @@ config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
 config :budgeting, Budgeting.Repo,
-  adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
   database: "budgeting_dev",

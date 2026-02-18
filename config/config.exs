@@ -14,8 +14,7 @@ config :budgeting, Budgeting.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "Allyf6zimZrZce8rrePBwHruhC2ewC1c7cVwahgq+nSAMrXYc6WjgBHT2YqaEe2+",
   render_errors: [view: Budgeting.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Budgeting.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub_server: Budgeting.PubSub
 
 # Configures Elixir's Logger
 config :logger, :console,
